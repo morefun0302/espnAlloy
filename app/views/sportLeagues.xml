@@ -1,0 +1,7 @@
+<Alloy>	 
+	<Window id="sportsLeagues" class="sportsLeagues" title="">
+		<TableView id="leaguesTable">
+       			
+		</TableView>			 
+	</Window>
+</Alloy>

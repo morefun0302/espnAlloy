@@ -1,0 +1,7 @@
+<Alloy>
+	<Tab id="tab2" title="Settings" icon="KS_nav_views.png">
+		<Window class="container" title="Settings">
+			<Label id="label">Settings</Label>
+		</Window>
+	</Tab>	
+</Alloy>

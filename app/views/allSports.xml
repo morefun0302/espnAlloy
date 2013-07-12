@@ -1,0 +1,8 @@
+<Alloy>
+	<Collection src="supportUriModel" />
+		<Tab id="tab1" title="Tab 1" icon="KS_nav_ui.png">
+			<Window id="sportsTab" class="tab1" title="All Sports">
+				<Widget id="buttongrid" src="com.appcelerator.buttongrid"/>		
+			</Window>
+		</Tab>
+</Alloy>
