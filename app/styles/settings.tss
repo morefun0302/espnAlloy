@@ -1,3 +1,18 @@
-".container": {
-	backgroundColor: "white"
+"#username": {
+	backgroundColor: "white",
+	width: "200dp",
+	height: "50dp",
+	top: "100dp"
+}
+
+"#password": {
+	backgroundColor: "white",
+	width: "200dp",
+	height: "50dp",
+	top: "200dp"
+}
+
+"#toolbar": {
+	bottom:0,
+	height:'44dp'
 }

@@ -9,3 +9,6 @@
 // object. For example:
 //
 // Alloy.Globals.someGlobalFunction = function(){};
+
+var Kinvey = Alloy.Globals.Kinvey = require('kinvey-titanium-1.0.3');
+

@@ -5,10 +5,8 @@ $.leaguesTable.title = args.title || '';
 $.sportsLeagues.title = args.title || '';
 
 
-var resource = args.url;
-var espnKey = "?apikey=epq7885ep4nyx4gdjfhfy9hx";
+var resource = args.url, espnKey = "?apikey=epq7885ep4nyx4gdjfhfy9hx", completeURL = resource + espnKey;
 
-var completeURL = resource + espnKey;
 
 Ti.API.info("Sport League HREF: "+ completeURL);
 

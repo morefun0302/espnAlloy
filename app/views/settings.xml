@@ -1,7 +1,13 @@
 <Alloy>
 	<Tab id="tab2" title="Settings" icon="KS_nav_views.png">
 		<Window class="container" title="Settings">
-			<Label id="label">Settings</Label>
+			<TextField id="username" hintText="Username"/>
+			<TextField id="password" hintText="Password"/>
+			
+			<View id="toolbar" platform="ios">
+			    <Require src="toolbar"/>
+			</View>
+
 		</Window>
 	</Tab>	
 </Alloy>

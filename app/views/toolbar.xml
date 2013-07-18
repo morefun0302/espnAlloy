@@ -1,0 +1,16 @@
+<Alloy>
+    <!-- Use iOS specific Toolbar -->
+	<Toolbar platform="ios" id="container">
+	    <Items>
+    	    <Label id="registerCallOut">Need an account?</Label>
+    	    <FlexSpace/>
+    	    <Button id="registerBtn" onClick="openModalDialog">Register</Button>
+	    </Items>
+	</Toolbar>
+
+	<!-- create custom toolbar for android -->
+	<View platform="android">
+	   <Label>TODO: Implement an Android toolbar?  Using menu for now.</Label>
+	</View>
+	
+</Alloy>

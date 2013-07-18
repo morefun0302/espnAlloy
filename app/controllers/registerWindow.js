@@ -1,0 +1,3 @@
+function closeModalDialog(){
+	$.register.close();
+}

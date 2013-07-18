@@ -22,9 +22,7 @@ function Controller() {
     var args = arguments[0] || {};
     $.leaguesTable.title = args.title || "";
     $.sportsLeagues.title = args.title || "";
-    var resource = args.url;
-    var espnKey = "?apikey=epq7885ep4nyx4gdjfhfy9hx";
-    var completeURL = resource + espnKey;
+    var resource = args.url, espnKey = "?apikey=epq7885ep4nyx4gdjfhfy9hx", completeURL = resource + espnKey;
     Ti.API.info("Sport League HREF: " + completeURL);
     var leagueCollection = Alloy.createCollection("supportUriModel");
     leagueCollection.fetch({

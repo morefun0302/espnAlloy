@@ -1,0 +1,6 @@
+<Alloy>
+	<Window id="register">
+		<Label  top="20" >Register Window</Label>
+		<Button id="login_cancel" onClick="closeModalDialog">Cancel</Button>
+	</Window>
+</Alloy>
