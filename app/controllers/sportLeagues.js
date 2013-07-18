@@ -4,7 +4,7 @@ $.leaguesTable.title = args.title || '';
 //Window Title
 $.sportsLeagues.title = args.title || '';
 
-
+//Dont steal my api key please.
 var resource = args.url, espnKey = "?apikey=epq7885ep4nyx4gdjfhfy9hx", completeURL = resource + espnKey;
 
 

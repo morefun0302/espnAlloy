@@ -1,4 +1,4 @@
-
+//Use your own keys please.
 var kInit = Kinvey.init({
     appKey    : 'kid_VTpfUIDqlM',
     appSecret : 'edff11d7b38741948dfcde8c1bbe328d'
