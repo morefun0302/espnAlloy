@@ -1,0 +1,5 @@
+<Alloy>
+    <TableViewRow class="rowClass">
+        <Label id="leagueName"></Label>
+    </TableViewRow>
+</Alloy>

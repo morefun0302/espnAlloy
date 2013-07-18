@@ -151,24 +151,12 @@ leagueCollection.fetch({
 		   			            // Ti.API.info("___ League Name: "+ leagueName);
 
 								//Create the Row
-								if (leagueName === "olympics" || leagueName === "action-sports") {
-								    var row = Ti.UI.createTableViewRow({"title":sportName, "url":sportHref});								
-								} else{
-								    var row = Ti.UI.createTableViewRow({"title":leagueName, "url":sportHref});										
+ 							    if (leagueName === "olympics" || leagueName === "action-sports") {
+								    var newRow = Alloy.createController("rowTemplate", {"leagueName":sportName, "url":sportHref});
+							    } else{
+									var newRow = Alloy.createController("rowTemplate", {"leagueName":leagueName, "url":sportHref})
 								};
-
-							    //Style the Row
-							    row.setColor("#000000");
-							    row.setFont("Helvetica Neue");
-							    row.setHasChild(true);
-							    //row.setHasDetail(true);			    
-							    row.setBackgroundColor("#eeeeee");
-							    row.setBackgroundSelectedColor("white");
-							    row.setBackgroundFocusedColor("white");
-							    row.setSelectedBackgroundColor("#ffffff");
-							    row.setSelectedColor("#000000");
-				
-							    leaguesTableData.push(row);
+							    leaguesTableData.push(newRow.getView());
 
 
 							   
@@ -182,7 +170,7 @@ leagueCollection.fetch({
 
 
 		// EVENT LISTENERS
-		// $.sportTable.addEventListener('click', function(_e) {
+		// $.leaguesTable.addEventListener('click', function(_e) {
 			// Ti.API.info("You Clicked On: " + _e.rowData.title);
 		    // var detailController = Alloy.createController('sportLeagues', {
 		        // parentTab : $.tab1,

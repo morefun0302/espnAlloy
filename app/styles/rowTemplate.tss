@@ -1,0 +1,16 @@
+".rowClass" : {
+    backgroundColor : "#fff"
+},
+ 
+"#leagueName" : {
+    color: 'gray',
+    height: '50dp',
+    left: '8dp',
+    backgroundColor: 'transparent',
+    font: {
+        fontFamily:'Helvetica',
+        fontSize: '14dp',
+        fontStyle: 'normal',
+        fontWeight: 'normal'
+    }
+}

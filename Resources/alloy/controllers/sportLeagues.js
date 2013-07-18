@@ -5,11 +5,15 @@ function Controller() {
     var $ = this;
     var exports = {};
     $.__views.sportsLeagues = Ti.UI.createWindow({
+        fullscreen: true,
+        backgroundColor: "white",
         id: "sportsLeagues",
         title: ""
     });
     $.__views.sportsLeagues && $.addTopLevelView($.__views.sportsLeagues);
     $.__views.leaguesTable = Ti.UI.createTableView({
+        height: Ti.UI.FILL,
+        width: Ti.UI.FILL,
         id: "leaguesTable"
     });
     $.__views.sportsLeagues.add($.__views.leaguesTable);
@@ -64,22 +68,14 @@ function Controller() {
                         void 0 != leagueWeekObjects.startDate && leagueWeekObjects.startDate;
                         void 0 != leagueWeekObjects.endDate && leagueWeekObjects.endDate;
                     }
-                    if ("olympics" === leagueName || "action-sports" === leagueName) var row = Ti.UI.createTableViewRow({
-                        title: sportName,
+                    if ("olympics" === leagueName || "action-sports" === leagueName) var newRow = Alloy.createController("rowTemplate", {
+                        leagueName: sportName,
                         url: sportHref
-                    }); else var row = Ti.UI.createTableViewRow({
-                        title: leagueName,
+                    }); else var newRow = Alloy.createController("rowTemplate", {
+                        leagueName: leagueName,
                         url: sportHref
                     });
-                    row.setColor("#000000");
-                    row.setFont("Helvetica Neue");
-                    row.setHasChild(true);
-                    row.setBackgroundColor("#eeeeee");
-                    row.setBackgroundSelectedColor("white");
-                    row.setBackgroundFocusedColor("white");
-                    row.setSelectedBackgroundColor("#ffffff");
-                    row.setSelectedColor("#000000");
-                    leaguesTableData.push(row);
+                    leaguesTableData.push(newRow.getView());
                 }
             });
             $.leaguesTable.setData(leaguesTableData);
