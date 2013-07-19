@@ -1,6 +1,12 @@
 <Alloy>
-	<Window id="register">
-		<Label  top="20" >Register Window</Label>
-		<Button id="login_cancel" onClick="closeModalDialog">Cancel</Button>
+	<Window id="register" title="Register">
+		<TextField id="firstName" hintText="First Name"/>
+		<TextField id="lastName" hintText="Last Name"/>
+		<TextField id="userName" hintText="Username"/>
+		<TextField id="pwReg" hintText="Password"/>
+		<TextField id="userEmail" hintText="Email"></TextField>
+		<Button id="registerBtn" title="Submit" onClick="registerUser"></Button>
+
+		<Label id="login_cancel"  bottom="20" onClick="closeModalDialog">Cancel</Label>
 	</Window>
 </Alloy>

@@ -1,7 +1,56 @@
 "#register": {
-	backgroundColor: "white"
+	backgroundColor: "#eeeeee"
 }
 
-"#login_cancel": {
+"#firstName": {
+	backgroundColor: "white",
+	width: "200dp",
+	height: "30dp",
+	top: "30dp",
+	borderRadius: 10
+}
+
+
+"#lastName": {
+	backgroundColor: "white",
+	width: "200dp",
+	height: "30dp",
+	top: "70dp",
+	borderRadius: 10
+}
+
+
+"#userName": {
+	backgroundColor: "white",
+	width: "200dp",
+	height: "30dp",
+	top: "110dp",
+	borderRadius: 10
+}
+
+"#pwReg": {
+	backgroundColor: "white",
+	width: "200dp",
+	height: "30dp",
+	top: "150dp",
+	borderRadius: 10,
+	passwordMask: true
+
+}
+
+"#userEmail": {
+	backgroundColor: "white",
+	width: "200dp",
+	height: "30dp",
+	top: "190dp",
+	borderRadius: 10
+}
+
+"#registerBtn": {
+	backgroundColor: "white",
+	width: "200dp",
+	height: "30dp",
+	top: "230dp",
+	borderRadius: 10
 
 }

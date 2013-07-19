@@ -11,7 +11,7 @@ function Controller() {
     var $ = this;
     var exports = {};
     var __defers = {};
-    var __alloyId10 = [];
+    var __alloyId9 = [];
     $.__views.registerCallOut = Ti.UI.createLabel({
         color: "#fff",
         font: {
@@ -20,23 +20,23 @@ function Controller() {
         text: "Need an account?",
         id: "registerCallOut"
     });
-    __alloyId10.push($.__views.registerCallOut);
-    $.__views.__alloyId11 = Ti.UI.createButton({
+    __alloyId9.push($.__views.registerCallOut);
+    $.__views.__alloyId10 = Ti.UI.createButton({
         systemButton: Ti.UI.iPhone.SystemButton.FLEXIBLE_SPACE
     });
-    __alloyId10.push($.__views.__alloyId11);
+    __alloyId9.push($.__views.__alloyId10);
     $.__views.registerBtn = Ti.UI.createButton({
         style: Ti.UI.iPhone.SystemButtonStyle.BORDERED,
         backgroundColor: "#ff0000",
         title: "Register",
         id: "registerBtn"
     });
-    __alloyId10.push($.__views.registerBtn);
+    __alloyId9.push($.__views.registerBtn);
     openModalDialog ? $.__views.registerBtn.addEventListener("click", openModalDialog) : __defers["$.__views.registerBtn!click!openModalDialog"] = true;
     $.__views.container = Ti.UI.iOS.createToolbar({
         barColor: "#776b65",
         zIndex: 100,
-        items: __alloyId10,
+        items: __alloyId9,
         id: "container"
     });
     $.__views.container && $.addTopLevelView($.__views.container);
