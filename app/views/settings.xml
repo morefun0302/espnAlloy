@@ -1,6 +1,7 @@
 <Alloy>
 	<Tab id="tab2" title="Settings" icon="KS_nav_views.png">
-		<Window class="container" title="Settings">
+		<Window id="container" title="Settings">
+			<View id="loginView">
 			<TextField id="username" hintText="Username"/>
 			<TextField id="password" hintText="Password"/>
 			<Button id="logInBtn" onClick="userLogIn">Log In</Button>
@@ -8,7 +9,7 @@
 			<View id="toolbar" platform="ios">
 			    <Require src="toolbar"/>
 			</View>
-
+			</View>
 		</Window>
 	</Tab>	
 </Alloy>

@@ -1,6 +1,36 @@
 Ti.API.info('Is user logged in? '+ userLoggedIn);
- 
-var theUser;
+
+
+/* 
+ * FORM VALIDATION 
+ * 
+ */
+$.username.addEventListener('change', function(e){
+    if(e.source.value.length < 1){
+		$.username.borderWidth = "2dp";
+		$.username.borderColor = "#B10713";
+	} else if (e.source.value.length > 1){
+		$.username.borderWidth = "2dp";
+		$.username.borderColor = "#68B25B";
+	};
+});
+
+$.password.addEventListener('change', function(e){
+    if(e.source.value.length < 1){
+		$.password.borderWidth = "2dp";
+		$.password.borderColor = "#B10713";
+	} else if (e.source.value.length > 1){
+		$.password.borderWidth = "2dp";
+		$.password.borderColor = "#68B25B";
+	};
+});
+
+//Hide keyboard on double tap, if its visible
+$.container.addEventListener('doubletap', function(e){
+    $.username.blur();
+    $.password.blur();    
+});
+
 
 function userLogIn(e){
 	if ($.username.value ==="" || $.password.value ===""){

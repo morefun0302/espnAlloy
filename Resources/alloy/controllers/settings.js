@@ -61,51 +61,62 @@ function Controller() {
     var $ = this;
     var exports = {};
     var __defers = {};
-    $.__views.__alloyId6 = Ti.UI.createWindow({
-        title: "Settings",
-        id: "__alloyId6"
+    $.__views.container = Ti.UI.createWindow({
+        id: "container",
+        title: "Settings"
     });
+    $.__views.loginView = Ti.UI.createView({
+        id: "loginView"
+    });
+    $.__views.container.add($.__views.loginView);
     $.__views.username = Ti.UI.createTextField({
         backgroundColor: "white",
+        borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         width: "200dp",
         height: "30dp",
         top: "80dp",
+        borderRadius: 10,
         id: "username",
         hintText: "Username"
     });
-    $.__views.__alloyId6.add($.__views.username);
+    $.__views.loginView.add($.__views.username);
     $.__views.password = Ti.UI.createTextField({
         backgroundColor: "white",
+        borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         width: "200dp",
         height: "30dp",
         top: "120dp",
+        borderRadius: 10,
+        autocapitalization: "TEXT_AUTOCAPITALIZATION_NONE",
         id: "password",
         hintText: "Password"
     });
-    $.__views.__alloyId6.add($.__views.password);
+    $.__views.loginView.add($.__views.password);
     $.__views.logInBtn = Ti.UI.createButton({
         backgroundColor: "white",
+        borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         width: "200dp",
         height: "30dp",
         top: "160dp",
+        borderRadius: 10,
         title: "Log In",
         id: "logInBtn"
     });
-    $.__views.__alloyId6.add($.__views.logInBtn);
+    $.__views.loginView.add($.__views.logInBtn);
     userLogIn ? $.__views.logInBtn.addEventListener("click", userLogIn) : __defers["$.__views.logInBtn!click!userLogIn"] = true;
     $.__views.toolbar = Ti.UI.createView({
         bottom: 0,
         height: "44dp",
         id: "toolbar"
     });
-    $.__views.__alloyId6.add($.__views.toolbar);
-    $.__views.__alloyId7 = Alloy.createController("toolbar", {
-        id: "__alloyId7",
+    $.__views.loginView.add($.__views.toolbar);
+    $.__views.__alloyId6 = Alloy.createController("toolbar", {
+        id: "__alloyId6",
         __parentSymbol: $.__views.toolbar
     });
-    $.__views.__alloyId7.setParent($.__views.toolbar);
+    $.__views.__alloyId6.setParent($.__views.toolbar);
     $.__views.tab2 = Ti.UI.createTab({
-        window: $.__views.__alloyId6,
+        window: $.__views.container,
         id: "tab2",
         title: "Settings",
         icon: "KS_nav_views.png"
@@ -114,6 +125,28 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     Ti.API.info("Is user logged in? " + userLoggedIn);
+    $.username.addEventListener("change", function(e) {
+        if (1 > e.source.value.length) {
+            $.username.borderWidth = "2dp";
+            $.username.borderColor = "#B10713";
+        } else if (e.source.value.length > 1) {
+            $.username.borderWidth = "2dp";
+            $.username.borderColor = "#68B25B";
+        }
+    });
+    $.password.addEventListener("change", function(e) {
+        if (1 > e.source.value.length) {
+            $.password.borderWidth = "2dp";
+            $.password.borderColor = "#B10713";
+        } else if (e.source.value.length > 1) {
+            $.password.borderWidth = "2dp";
+            $.password.borderColor = "#68B25B";
+        }
+    });
+    $.container.addEventListener("doubletap", function() {
+        $.username.blur();
+        $.password.blur();
+    });
     __defers["$.__views.logInBtn!click!userLogIn"] && $.__views.logInBtn.addEventListener("click", userLogIn);
     _.extend($, exports);
 }

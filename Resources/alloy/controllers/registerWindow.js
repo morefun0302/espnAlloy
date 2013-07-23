@@ -2,52 +2,53 @@ function Controller() {
     function closeModalDialog() {
         $.register.close();
     }
-    function registerUser() {
-        Kinvey.Backbone.User.exists($.userName.value, {
-            success: function() {
-                var dialog = Ti.UI.createAlertDialog({
-                    ok: "Okay",
-                    message: "Looks like that Username already exists!",
-                    title: "Ooops"
+    function registerUserSubmit() {
+        var registerUser = new Kinvey.Backbone.User();
+        registerUser.save({
+            username: $.userName.value,
+            password: $.pwReg.value,
+            email: $.userEmail.value,
+            first_name: $.firstName.value,
+            last_name: $.lastName.value
+        }, {
+            success: function(model, response) {
+                response._id;
+                response._acl;
+                response._kmd;
+                var userName = response.username;
+                response.password;
+                var userEmail = response.email;
+                Ti.API.info("user email: " + userEmail);
+                alert("Thank you for registering, an email verification is on the way.");
+                Kinvey.Backbone.User.verifyEmail(userName, {
+                    success: function() {
+                        Ti.API.info("Confirm Email Sent!");
+                    },
+                    error: function() {
+                        Ti.API.error("Confirm Email Failed!");
+                    }
                 });
-                dialog.addEventListener("click", function() {
-                    $.userName.focus();
-                });
-                dialog.show();
             },
             error: function() {
-                Ti.API.error("Username Doesnt Exist!");
+                Ti.API.error("Registering User Failed!");
+                Kinvey.Backbone.User.exists($.userName.value, {
+                    success: function() {
+                        var dialog = Ti.UI.createAlertDialog({
+                            ok: "Okay",
+                            message: "Looks like that Username already exists!",
+                            title: "Ooops"
+                        });
+                        dialog.addEventListener("click", function() {
+                            $.userName.focus();
+                        });
+                        dialog.show();
+                    },
+                    error: function() {
+                        Ti.API.error("Username Doesnt Exist!");
+                    }
+                });
             }
         });
-        if (1 > $.firstName.value.length) {
-            $.firstName.borderWidth = "2dp";
-            $.firstName.borderColor = "#B10713";
-        } else if ($.firstName.value.length > 1) {
-            $.firstName.borderWidth = "2dp";
-            $.firstName.borderColor = "#68B25B";
-        } else {
-            var registerUser = new Kinvey.Backbone.User();
-            registerUser.save({
-                username: $.userName.value,
-                password: $.pwReg.value,
-                email: $.userEmail.value,
-                first_name: $.firstName.value,
-                last_name: $.lastName.value
-            }, {
-                success: function(model, response) {
-                    response._id;
-                    response._acl;
-                    response._kmd;
-                    response.username;
-                    response.password;
-                    var userEmail = response.email;
-                    Ti.API.info("user email: " + userEmail);
-                },
-                error: function() {
-                    Ti.API.error("Registering User Failed!");
-                }
-            });
-        }
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     arguments[0] ? arguments[0]["__parentSymbol"] : null;
@@ -63,6 +64,7 @@ function Controller() {
     $.__views.register && $.addTopLevelView($.__views.register);
     $.__views.firstName = Ti.UI.createTextField({
         backgroundColor: "white",
+        borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         width: "200dp",
         height: "30dp",
         top: "30dp",
@@ -73,6 +75,7 @@ function Controller() {
     $.__views.register.add($.__views.firstName);
     $.__views.lastName = Ti.UI.createTextField({
         backgroundColor: "white",
+        borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         width: "200dp",
         height: "30dp",
         top: "70dp",
@@ -83,6 +86,7 @@ function Controller() {
     $.__views.register.add($.__views.lastName);
     $.__views.userName = Ti.UI.createTextField({
         backgroundColor: "white",
+        borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         width: "200dp",
         height: "30dp",
         top: "110dp",
@@ -93,6 +97,7 @@ function Controller() {
     $.__views.register.add($.__views.userName);
     $.__views.pwReg = Ti.UI.createTextField({
         backgroundColor: "white",
+        borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         width: "200dp",
         height: "30dp",
         top: "150dp",
@@ -104,10 +109,13 @@ function Controller() {
     $.__views.register.add($.__views.pwReg);
     $.__views.userEmail = Ti.UI.createTextField({
         backgroundColor: "white",
+        borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         width: "200dp",
         height: "30dp",
         top: "190dp",
         borderRadius: 10,
+        keyboardType: "KEYBOARD_EMAIL",
+        autocapitalization: Ti.UI.TEXT_AUTOCAPITALIZATION_NONE,
         id: "userEmail",
         hintText: "Email"
     });
@@ -122,7 +130,7 @@ function Controller() {
         title: "Submit"
     });
     $.__views.register.add($.__views.registerBtn);
-    registerUser ? $.__views.registerBtn.addEventListener("click", registerUser) : __defers["$.__views.registerBtn!click!registerUser"] = true;
+    registerUserSubmit ? $.__views.registerBtn.addEventListener("click", registerUserSubmit) : __defers["$.__views.registerBtn!click!registerUserSubmit"] = true;
     $.__views.login_cancel = Ti.UI.createLabel({
         text: "Cancel",
         id: "login_cancel",
@@ -143,14 +151,21 @@ function Controller() {
     });
     $.lastName.addEventListener("change", function(e) {
         if (1 > e.source.value.length) {
-            $.firstName.borderWidth = "2dp";
-            $.firstName.borderColor = "#B10713";
+            $.lastName.borderWidth = "2dp";
+            $.lastName.borderColor = "#B10713";
         } else if (e.source.value.length > 1) {
-            $.firstName.borderWidth = "2dp";
-            $.firstName.borderColor = "#68B25B";
+            $.lastName.borderWidth = "2dp";
+            $.lastName.borderColor = "#68B25B";
         }
     });
-    __defers["$.__views.registerBtn!click!registerUser"] && $.__views.registerBtn.addEventListener("click", registerUser);
+    $.register.addEventListener("doubletap", function() {
+        $.firstName.blur();
+        $.lastName.blur();
+        $.userName.blur();
+        $.pwReg.blur();
+        $.userEmail.blur();
+    });
+    __defers["$.__views.registerBtn!click!registerUserSubmit"] && $.__views.registerBtn.addEventListener("click", registerUserSubmit);
     __defers["$.__views.login_cancel!click!closeModalDialog"] && $.__views.login_cancel.addEventListener("click", closeModalDialog);
     _.extend($, exports);
 }

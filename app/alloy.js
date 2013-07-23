@@ -19,6 +19,12 @@ var kInit = Kinvey.init({
 				var userEmail = response.email;
 		     	
 				Ti.API.info('THE ACTIVE USER IS: ' + userName );
+				
+				var user   = Kinvey.Backbone.getActiveUser();
+				var status = user.getEmailVerification();
+				
+				Ti.API.info('Email Verification Status: ' + status );
+
 	        
 	    },
 	    error : function(e){

@@ -4,6 +4,7 @@
 
 "#firstName": {
 	backgroundColor: "white",
+	borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,	
 	width: "200dp",
 	height: "30dp",
 	top: "30dp",
@@ -13,6 +14,7 @@
 
 "#lastName": {
 	backgroundColor: "white",
+	borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,	
 	width: "200dp",
 	height: "30dp",
 	top: "70dp",
@@ -22,6 +24,7 @@
 
 "#userName": {
 	backgroundColor: "white",
+	borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 	width: "200dp",
 	height: "30dp",
 	top: "110dp",
@@ -30,6 +33,7 @@
 
 "#pwReg": {
 	backgroundColor: "white",
+	borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 	width: "200dp",
 	height: "30dp",
 	top: "150dp",
@@ -40,10 +44,13 @@
 
 "#userEmail": {
 	backgroundColor: "white",
+	borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 	width: "200dp",
 	height: "30dp",
 	top: "190dp",
-	borderRadius: 10
+	borderRadius: 10,
+	keyboardType: Ti.UI.KEYBOARD_EMAIL,
+	autocapitalization: Ti.UI.TEXT_AUTOCAPITALIZATION_NONE
 }
 
 "#registerBtn": {

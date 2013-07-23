@@ -27,42 +27,22 @@ $.lastName.addEventListener('change', function(e){
 	};
 });
 
+//Hide keyboard on double tap, if its visible
+$.register.addEventListener('doubletap', function(e){
+    $.firstName.blur();
+    $.lastName.blur();
+    $.userName.blur();
+    $.pwReg.blur();
+    $.userEmail.blur();  
+});
 
 
 /* 
  * Register User 
  * 
  */
-function registerUser(e){
-	
-	var checkUserNameExists = Kinvey.Backbone.User.exists($.userName.value, {
-	    success: function(usernameExists) {
-	       	//alert("Sorry, but that Username already exists!");
-	       	
-	       	  var dialog = Ti.UI.createAlertDialog({
-			    ok: 'Okay',
-			    message: 'Looks like that Username already exists!',
-			    title: 'Ooops'
-			  });
-			  dialog.addEventListener('click', function(e){
-			      $.userName.focus();
-			  });
-			  dialog.show();
-	    },
-	    error : function(){
-	        Ti.API.error("Username Doesnt Exist!");
-	    }
-	});
-	
-	
-	if ($.firstName.value.length < 1){
-		$.firstName.borderWidth = "2dp";
-		$.firstName.borderColor = "#B10713";
-	} else if ($.firstName.value.length > 1){
-		$.firstName.borderWidth = "2dp";
-		$.firstName.borderColor = "#68B25B";
-	} else {
-		
+function registerUserSubmit(e){
+			
 		var registerUser = new Kinvey.Backbone.User();
 		
 		var promise = registerUser.save({
@@ -83,14 +63,42 @@ function registerUser(e){
 		    	var userEmail = response.email;
 		    	
 		        Ti.API.info('user email: ' + userEmail );
+		        
+		        alert("Thank you for registering, an email verification is on the way.");
+		        
+		        var verifyNewUserEmail = Kinvey.Backbone.User.verifyEmail(userName, {
+				    success: function() {
+				        Ti.API.info("Confirm Email Sent!");
+				    },
+				    error : function(){
+				        Ti.API.error("Confirm Email Failed!");
+				    }
+				});
 
 		    },
 		    error : function(){
 		        Ti.API.error("Registering User Failed!");
+				var checkUserNameExists = Kinvey.Backbone.User.exists($.userName.value, {
+				    success: function(usernameExists) {
+				       	//alert("Sorry, but that Username already exists!");
+				       	
+				       	  var dialog = Ti.UI.createAlertDialog({
+						    ok: 'Okay',
+						    message: 'Looks like that Username already exists!',
+						    title: 'Ooops'
+						  });
+						  dialog.addEventListener('click', function(e){
+						      $.userName.focus();
+						  });
+						  dialog.show();
+				    },
+				    error : function(){
+				        Ti.API.error("Username Doesnt Exist!");
+				    }
+				});		        
+		        
 		    }
 		});
 		
-	};
-
 }
 

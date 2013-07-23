@@ -1,22 +1,32 @@
+"#loginView":{
+
+}
+
 "#username": {
 	backgroundColor: "white",
+	borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 	width: "200dp",
 	height: "30dp",
-	top: "80dp"
+	top: "80dp",
+	borderRadius: 10
 }
 
 "#password": {
 	backgroundColor: "white",
+	borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 	width: "200dp",
 	height: "30dp",
-	top: "120dp"
+	top: "120dp",
+	borderRadius: 10,
+	autocapitalization: 'TEXT_AUTOCAPITALIZATION_NONE'
 }
 
 "#logInBtn": {
 	backgroundColor: "white",
 	width: "200dp",
 	height: "30dp",
-	top: "160dp"
+	top: "160dp",
+	borderRadius: 10
 }
 
 "#toolbar": {

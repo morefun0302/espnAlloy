@@ -4,8 +4,8 @@
 		<TextField id="lastName" hintText="Last Name"/>
 		<TextField id="userName" hintText="Username"/>
 		<TextField id="pwReg" hintText="Password"/>
-		<TextField id="userEmail" hintText="Email"></TextField>
-		<Button id="registerBtn" title="Submit" onClick="registerUser"></Button>
+		<TextField id="userEmail" keyboardType="KEYBOARD_EMAIL" hintText="Email"></TextField>
+		<Button id="registerBtn" title="Submit" onClick="registerUserSubmit"></Button>
 
 		<Label id="login_cancel"  bottom="20" onClick="closeModalDialog">Cancel</Label>
 	</Window>
