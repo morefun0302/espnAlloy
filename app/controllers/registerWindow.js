@@ -2,10 +2,37 @@ function closeModalDialog(){
 	$.register.close();
 }
 
-if($.firstName.change == true){
-	Ti.API.info("YAY");
-}
 
+/* 
+ * FORM VALIDATION 
+ * 
+ */
+$.firstName.addEventListener('change', function(e){
+    if(e.source.value.length < 1){
+		$.firstName.borderWidth = "2dp";
+		$.firstName.borderColor = "#B10713";
+	} else if (e.source.value.length > 1){
+		$.firstName.borderWidth = "2dp";
+		$.firstName.borderColor = "#68B25B";
+	};
+});
+
+$.lastName.addEventListener('change', function(e){
+    if(e.source.value.length < 1){
+		$.lastName.borderWidth = "2dp";
+		$.lastName.borderColor = "#B10713";
+	} else if (e.source.value.length > 1){
+		$.lastName.borderWidth = "2dp";
+		$.lastName.borderColor = "#68B25B";
+	};
+});
+
+
+
+/* 
+ * Register User 
+ * 
+ */
 function registerUser(e){
 	
 	var checkUserNameExists = Kinvey.Backbone.User.exists($.userName.value, {

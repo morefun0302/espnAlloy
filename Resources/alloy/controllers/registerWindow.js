@@ -132,7 +132,24 @@ function Controller() {
     closeModalDialog ? $.__views.login_cancel.addEventListener("click", closeModalDialog) : __defers["$.__views.login_cancel!click!closeModalDialog"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
-    true == $.firstName.change && Ti.API.info("YAY");
+    $.firstName.addEventListener("change", function(e) {
+        if (1 > e.source.value.length) {
+            $.firstName.borderWidth = "2dp";
+            $.firstName.borderColor = "#B10713";
+        } else if (e.source.value.length > 1) {
+            $.firstName.borderWidth = "2dp";
+            $.firstName.borderColor = "#68B25B";
+        }
+    });
+    $.lastName.addEventListener("change", function(e) {
+        if (1 > e.source.value.length) {
+            $.firstName.borderWidth = "2dp";
+            $.firstName.borderColor = "#B10713";
+        } else if (e.source.value.length > 1) {
+            $.firstName.borderWidth = "2dp";
+            $.firstName.borderColor = "#68B25B";
+        }
+    });
     __defers["$.__views.registerBtn!click!registerUser"] && $.__views.registerBtn.addEventListener("click", registerUser);
     __defers["$.__views.login_cancel!click!closeModalDialog"] && $.__views.login_cancel.addEventListener("click", closeModalDialog);
     _.extend($, exports);
