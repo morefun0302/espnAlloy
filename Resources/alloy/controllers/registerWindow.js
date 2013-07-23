@@ -3,23 +3,51 @@ function Controller() {
         $.register.close();
     }
     function registerUser() {
-        "" === $.userName.value || "" === $.pwReg.value ? alert("You need to put a user id in") : Kinvey.User.signup({
-            username: $.userName.value,
-            password: $.pwReg.value,
-            email: $.userEmail.value,
-            first_name: $.firstName.value,
-            last_name: $.lastName.value
-        }, {
-            success: function(response) {
-                response._id;
-                response._acl;
-                response._kmd;
-                response.username;
-                response.password;
-                var userEmail = response.email;
-                Ti.API.info("user email: " + userEmail);
+        Kinvey.Backbone.User.exists($.userName.value, {
+            success: function() {
+                var dialog = Ti.UI.createAlertDialog({
+                    ok: "Okay",
+                    message: "Looks like that Username already exists!",
+                    title: "Ooops"
+                });
+                dialog.addEventListener("click", function() {
+                    $.userName.focus();
+                });
+                dialog.show();
+            },
+            error: function() {
+                Ti.API.error("Username Doesnt Exist!");
             }
         });
+        if (1 > $.firstName.value.length) {
+            $.firstName.borderWidth = "2dp";
+            $.firstName.borderColor = "#B10713";
+        } else if ($.firstName.value.length > 1) {
+            $.firstName.borderWidth = "2dp";
+            $.firstName.borderColor = "#68B25B";
+        } else {
+            var registerUser = new Kinvey.Backbone.User();
+            registerUser.save({
+                username: $.userName.value,
+                password: $.pwReg.value,
+                email: $.userEmail.value,
+                first_name: $.firstName.value,
+                last_name: $.lastName.value
+            }, {
+                success: function(model, response) {
+                    response._id;
+                    response._acl;
+                    response._kmd;
+                    response.username;
+                    response.password;
+                    var userEmail = response.email;
+                    Ti.API.info("user email: " + userEmail);
+                },
+                error: function() {
+                    Ti.API.error("Registering User Failed!");
+                }
+            });
+        }
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     arguments[0] ? arguments[0]["__parentSymbol"] : null;
@@ -104,6 +132,7 @@ function Controller() {
     closeModalDialog ? $.__views.login_cancel.addEventListener("click", closeModalDialog) : __defers["$.__views.login_cancel!click!closeModalDialog"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
+    true == $.firstName.change && Ti.API.info("YAY");
     __defers["$.__views.registerBtn!click!registerUser"] && $.__views.registerBtn.addEventListener("click", registerUser);
     __defers["$.__views.login_cancel!click!closeModalDialog"] && $.__views.login_cancel.addEventListener("click", closeModalDialog);
     _.extend($, exports);

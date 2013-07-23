@@ -3,6 +3,7 @@
 		<Window class="container" title="Settings">
 			<TextField id="username" hintText="Username"/>
 			<TextField id="password" hintText="Password"/>
+			<Button id="logInBtn" onClick="userLogIn">Log In</Button>
 			
 			<View id="toolbar" platform="ios">
 			    <Require src="toolbar"/>

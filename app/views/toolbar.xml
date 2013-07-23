@@ -4,6 +4,8 @@
 	    <Items>
     	    <Label id="registerCallOut">Need an account?</Label>
     	    <FlexSpace/>
+    	    <Button id="logOutBtn" onClick="logOutUser">Log Out</Button>
+    	    <FlexSpace/>
     	    <Button id="registerBtn" onClick="openModalDialog">Register</Button>
 	    </Items>
 	</Toolbar>

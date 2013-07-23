@@ -1,45 +1,81 @@
-//Use your own keys please.
-// var kInit = Kinvey.init({
-    // appKey    : 'kid_VTpfUIDqlM',
-    // appSecret : 'edff11d7b38741948dfcde8c1bbe328d'
-// });
+Ti.API.info('Is user logged in? '+ userLoggedIn);
+ 
+var theUser;
 
-// kInit.then(function(activeUser) {
-    // var promise = Kinvey.User.login({
-    // username : 'admin',
-    // password : 'FI11giggs'
-		// }, {
-    // success: function(response) {
-//     	
-    	// var loginSuccess = true;
-//     	
-    	// var userId    = response._id;
-    	// var userAcl   = response._acl;
-    	// var userKmd   = response._kmd;
-    	// var userName  = response.username;
-    	// var passWord  = response.password;
-    	// var userEmail = response.email;
-//     	
-        // Ti.API.info('user name: ' + userName );
-//         
-//         
-    // }
-	// });
-// 
-// });
+function userLogIn(e){
+	if ($.username.value ==="" || $.password.value ===""){
+    	alert("You need to put a user id in");
+	} else {	
+			
+			var userToLogin = new Kinvey.Backbone.User();
+		
+			var promise = userToLogin.login({
+				username : $.username.value,
+				password : $.password.value
+				}, {
+				success: function(model, response, options) { 	
+					userLoggedIn = true;
+			     	
+					var userId    = response._id;
+					var userAcl   = response._acl;
+					var userKmd   = response._kmd;
+					var userName  = response.username;
+					var passWord  = response.password;
+					var userEmail = response.email;
+			     	
+					Ti.API.info('user name: ' + userName );
+			        
+			        userToLogin = new Kinvey.Backbone.User({username:userName, password:passWord});		         
+			        		         
+			        isUserLoggedIn();
+				}
+				});
+	};
+};
 
 
+function isUserLoggedIn(e){
+	Ti.API.info('Is user logged in? '+ userLoggedIn);
+	
+	 var theUserCollection = new Kinvey.Backbone.UserCollection('userToLogin'); 
+	 
+	 theUserCollection.fetch({	 	
+	 	success : function(){ 
+			_.each(theUserCollection.models, function(element, index, list){
+				//Elements to JSON			
+				var elementToJson = element.toJSON();
+				
+				var elementString = JSON.stringify(element);
+	            Ti.API.info("elementString: "+ elementString);
+				
+				
+			});	
+
+	    },
+	    error : function(){
+	        Ti.API.error("blarg!");
+	    }
+	 	
+	 }); 
+
+	var activeUser = Kinvey.Backbone.getActiveUser();
+	var promise = activeUser.me({
+	    success: function(model, response, options) {
+				var userId    = response._id;
+				var userAcl   = response._acl;
+				var userKmd   = response._kmd;
+				var userName  = response.username;
+				var passWord  = response.password;
+				var userEmail = response.email;
+		     	
+				Ti.API.info('THE ACTIVE USER IS: ' + userName );
+	        
+	    },
+	    error : function(){
+	        Ti.API.error("Setting Active User Failed!");
+	    }
+	});
 
 
-// var user = Kinvey.User.login('admin', 'FI11giggs', {
-    // success: function(response) {
-         // Ti.API.info('response: ' + response.kinvey);
-    // }
-// });
+}
 
-// var promise = Kinvey.ping();
-// promise.then(function(response) {
-    // Ti.API.info('Kinvey Ping Success. Kinvey Service is alive, version: ' + response.version + ', response: ' + response.kinvey);
-// }, function(error) {
-    // Ti.API.info('Kinvey Ping Failed. Response: ' + error.description);
-// });

@@ -1,15 +1,22 @@
 "#username": {
 	backgroundColor: "white",
 	width: "200dp",
-	height: "50dp",
-	top: "100dp"
+	height: "30dp",
+	top: "80dp"
 }
 
 "#password": {
 	backgroundColor: "white",
 	width: "200dp",
-	height: "50dp",
-	top: "200dp"
+	height: "30dp",
+	top: "120dp"
+}
+
+"#logInBtn": {
+	backgroundColor: "white",
+	width: "200dp",
+	height: "30dp",
+	top: "160dp"
 }
 
 "#toolbar": {
